@@ -1,6 +1,6 @@
-''' You work at a company that sends daily reports to clients via email. The goal of this project is to automate the process of sending these reports via email.
-
-Here are the steps you can take to automate this process:
+''' 
+    You work at a company that sends daily reports to clients via email. The goal of this project is to automate the process of sending these reports via email.
+    Here are the steps you can take to automate this process:
 
     Use the smtplib library to connect to the email server and send the emails.
 
@@ -12,10 +12,8 @@ Here are the steps you can take to automate this process:
 
     Use the schedule library to schedule the script to run daily at a specific time.
 
-    You can also set up a log file to keep track of the emails that have been sent and any errors that may have occurred during the email sending process. '''
-
-
-#https://github.com/bsababu/automated-email-with-smtp.git
+    You can also set up a log file to keep track of the emails that have been sent and any errors that may have occurred during the email sending process.
+ '''
 
 import smtplib, email,getpass
 
@@ -27,7 +25,6 @@ from email.mime.multipart import MIMEMultipart
 def sendEmail():
     host= "smtp-mail.outlook.com" # use the hotmail smtp server
     port = 587
-
     # sender = input("Enter the source email")
     sender = "oscobo@live.com" #you can enter your source
     #subj = input("Enter your subject: \n")
@@ -80,7 +77,7 @@ def sendEmail():
         )
         msg.attach(part)
         for ml in list_of_mails:
-            #msg["To"] = ml
+
             pck = msg.as_string()
             smtp.sendmail(sender,ml,pck)
         print("Message sent")

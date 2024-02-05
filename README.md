@@ -1,6 +1,5 @@
 ## automated-email-with-smtp
 
-
 You can send an email to multiple recipients with attachments
 
 

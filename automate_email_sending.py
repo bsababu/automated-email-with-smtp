@@ -15,8 +15,7 @@
     You can also set up a log file to keep track of the emails that have been sent and any errors that may have occurred during the email sending process.
  '''
 
-import smtplib, email,getpass
-
+import smtplib, email,getpass, logging, schedule, time
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
@@ -77,9 +76,11 @@ def sendEmail():
         )
         msg.attach(part)
         for ml in list_of_mails:
-
             pck = msg.as_string()
             smtp.sendmail(sender,ml,pck)
+## LOGS
+            logging.basicConfig(filename='logs.log', filemode='w',format='%(message)s - %(asctime)s -', level=logging.INFO)
+            logging.info('email: %s was sent', ml)
         print("Message sent")
     except smtplib.SMTPResponseException as e:
         print(e)
@@ -87,6 +88,12 @@ def sendEmail():
     finally:
         smtp.quit
 
+#Scheduled to run at 00:00
+def schedule():
+    schedule.every().day.at("00:00").do(sendEmail)
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
 
 if __name__ == '__main__':
     sendEmail()
